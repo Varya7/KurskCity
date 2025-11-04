@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Заголовок -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Планирование путешествия"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- 1. Сколько времени есть -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Сколько времени есть?"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Spinner
+            android:id="@+id/spinner_time_available"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 2. Когда планируете начать? -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. Когда планируете начать?"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Spinner
+            android:id="@+id/spinner_start_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 3. Откуда начать маршрут? -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. Откуда начать маршрут?"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/et_start_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите адрес или место"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 4. Ваши интересы -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4. Ваши интересы"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
+            <CheckBox
+                android:id="@+id/cb_architecture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Архитектура" />
+
+            <CheckBox
+                android:id="@+id/cb_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="История" />
+
+            <CheckBox
+                android:id="@+id/cb_art"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Искусство" />
+
+            <CheckBox
+                android:id="@+id/cb_museums"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Музеи" />
+
+            <CheckBox
+                android:id="@+id/cb_shopping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Шопинг" />
+
+            <CheckBox
+                android:id="@+id/cb_food"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Еда" />
+
+            <CheckBox
+                android:id="@+id/cb_nature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Отдых на природе" />
+
+            <CheckBox
+                android:id="@+id/cb_entertainment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Развлечения и активность" />
+
+            <CheckBox
+                android:id="@+id/cb_concerts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Концерты" />
+
+            <CheckBox
+                android:id="@+id/cb_theater"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Спектакли" />
+
+        </LinearLayout>
+
+        <!-- 5. Бюджет -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5. Бюджет"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/et_budget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Укажите бюджет в рублях"
+            android:inputType="number"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 6. Путешествие -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6. Путешествие"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Spinner
+            android:id="@+id/spinner_travel_companion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Кнопка отправки -->
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Создать маршрут"
+            android:textSize="18sp"
+            android:background="#FF6200EE"
+            android:textColor="@android:color/white"
+            android:padding="16dp" />
+
+    </LinearLayout>
+</ScrollView>
