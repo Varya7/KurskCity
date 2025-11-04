@@ -25,6 +25,10 @@ android {
             )
         }
     }
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -32,11 +36,9 @@ android {
 }
 
 configurations.all {
-    // Исключаем конфликтующие старые Kotlin библиотеки
     exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib-jdk7")
     exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib-jdk8")
 
-    // Принудительно используем одну версию Kotlin
     resolutionStrategy {
         eachDependency {
             if (requested.group == "org.jetbrains.kotlin") {
@@ -46,6 +48,9 @@ configurations.all {
     }
 }
 dependencies {
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("org.jsoup:jsoup:1.17.1")
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
