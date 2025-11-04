@@ -1,177 +1,242 @@
 package com.example.kurskcity;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.content.Intent;
-
 import android.view.View;
 import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.textfield.TextInputEditText;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class SurveyActivity extends AppCompatActivity {
 
-    private Spinner timeAvailableSpinner, startTimeSpinner, travelCompanionSpinner;
-    private EditText startLocationEditText, budgetEditText;
-    private CheckBox architectureCheckBox, historyCheckBox, artCheckBox, museumsCheckBox;
-    private CheckBox shoppingCheckBox, foodCheckBox, natureCheckBox, entertainmentCheckBox;
-    private CheckBox concertsCheckBox, theaterCheckBox;
+    private TextInputEditText etDate, etStartTime, etDurationHours, etDurationMinutes,
+            etStartLocation, etBudget;
+    private Spinner travelCompanionSpinner;
+    private CheckBox cbArchitecture, cbHistory, cbArt, cbMuseums, cbShopping, cbFood;
+    private CheckBox cbNature, cbEntertainment, cbConcerts, cbTheater;
     private Button submitButton;
+    private Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
 
+        calendar = Calendar.getInstance();
         initializeViews();
-        setupSpinners();
+        setupDateAndTimePickers();
+        setupSpinner();
         setupSubmitButton();
     }
 
     private void initializeViews() {
-        // Инициализация Spinner
-        timeAvailableSpinner = findViewById(R.id.spinner_time_available);
-        startTimeSpinner = findViewById(R.id.spinner_start_time);
+        etDate = findViewById(R.id.et_date);
+        etStartTime = findViewById(R.id.et_start_time);
+        etDurationHours = findViewById(R.id.et_duration_hours);
+        etDurationMinutes = findViewById(R.id.et_duration_minutes);
+        etStartLocation = findViewById(R.id.et_start_location);
+        etBudget = findViewById(R.id.et_budget);
         travelCompanionSpinner = findViewById(R.id.spinner_travel_companion);
 
-        // Инициализация EditText
-        startLocationEditText = findViewById(R.id.et_start_location);
-        budgetEditText = findViewById(R.id.et_budget);
+        cbArchitecture = findViewById(R.id.cb_architecture);
+        cbHistory = findViewById(R.id.cb_history);
+        cbArt = findViewById(R.id.cb_art);
+        cbMuseums = findViewById(R.id.cb_museums);
+        cbShopping = findViewById(R.id.cb_shopping);
+        cbFood = findViewById(R.id.cb_food);
+        cbNature = findViewById(R.id.cb_nature);
+        cbEntertainment = findViewById(R.id.cb_entertainment);
+        cbConcerts = findViewById(R.id.cb_concerts);
+        cbTheater = findViewById(R.id.cb_theater);
 
-        // Инициализация CheckBox для интересов
-        architectureCheckBox = findViewById(R.id.cb_architecture);
-        historyCheckBox = findViewById(R.id.cb_history);
-        artCheckBox = findViewById(R.id.cb_art);
-        museumsCheckBox = findViewById(R.id.cb_museums);
-        shoppingCheckBox = findViewById(R.id.cb_shopping);
-        foodCheckBox = findViewById(R.id.cb_food);
-        natureCheckBox = findViewById(R.id.cb_nature);
-        entertainmentCheckBox = findViewById(R.id.cb_entertainment);
-        concertsCheckBox = findViewById(R.id.cb_concerts);
-        theaterCheckBox = findViewById(R.id.cb_theater);
-
-        // Инициализация кнопки
         submitButton = findViewById(R.id.btn_submit);
     }
 
-    private void setupSpinners() {
-        // Настройка Spinner для времени
-        ArrayAdapter<CharSequence> timeAdapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.time_available_options,
-                android.R.layout.simple_spinner_item
-        );
-        timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        timeAvailableSpinner.setAdapter(timeAdapter);
+    private void setupDateAndTimePickers() {
+        etDate.setOnClickListener(v -> showDatePicker());
+        etStartTime.setOnClickListener(v -> showTimePicker());
+    }
 
-        // Настройка Spinner для времени начала
-        ArrayAdapter<CharSequence> startTimeAdapter = ArrayAdapter.createFromResource(
+    private void showDatePicker() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
-                R.array.start_time_options,
-                android.R.layout.simple_spinner_item
+                (view, year, month, dayOfMonth) -> {
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, month);
+                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    updateDateLabel();
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
         );
-        startTimeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        startTimeSpinner.setAdapter(startTimeAdapter);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
+    }
 
-        // Настройка Spinner для спутников
-        ArrayAdapter<CharSequence> companionAdapter = ArrayAdapter.createFromResource(
+    private void showTimePicker() {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                this,
+                (view, hourOfDay, minute) -> {
+                    calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    calendar.set(Calendar.MINUTE, minute);
+                    updateTimeLabel();
+                },
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                true
+        );
+        timePickerDialog.show();
+    }
+
+    private void updateDateLabel() {
+        String dateFormat = "dd.MM.yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.getDefault());
+        etDate.setText(sdf.format(calendar.getTime()));
+    }
+
+    private void updateTimeLabel() {
+        String timeFormat = "HH:mm";
+        SimpleDateFormat sdf = new SimpleDateFormat(timeFormat, Locale.getDefault());
+        etStartTime.setText(sdf.format(calendar.getTime()));
+    }
+
+    private void setupSpinner() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.travel_companion_options,
                 android.R.layout.simple_spinner_item
         );
-        companionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        travelCompanionSpinner.setAdapter(companionAdapter);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        travelCompanionSpinner.setAdapter(adapter);
     }
 
     private void setupSubmitButton() {
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (validateInput()) {
-                    submitSurvey();
-                }
+        submitButton.setOnClickListener(v -> {
+            if (validateInput()) {
+                submitSurvey();
             }
         });
     }
 
     private boolean validateInput() {
-        if (startLocationEditText.getText().toString().trim().isEmpty()) {
-            Toast.makeText(this, "Пожалуйста, укажите начальную точку маршрута", Toast.LENGTH_SHORT).show();
+        if (etDate.getText().toString().trim().isEmpty()) {
+            showError("Пожалуйста, выберите дату");
             return false;
         }
 
-        if (budgetEditText.getText().toString().trim().isEmpty()) {
-            Toast.makeText(this, "Пожалуйста, укажите бюджет", Toast.LENGTH_SHORT).show();
+        if (etStartTime.getText().toString().trim().isEmpty()) {
+            showError("Пожалуйста, выберите время начала");
+            return false;
+        }
+
+        String hoursText = etDurationHours.getText().toString().trim();
+        String minutesText = etDurationMinutes.getText().toString().trim();
+
+        if (hoursText.isEmpty() && minutesText.isEmpty()) {
+            showError("Пожалуйста, укажите продолжительность (часы или минуты)");
+            return false;
+        }
+
+        if (etStartLocation.getText().toString().trim().isEmpty()) {
+            showError("Пожалуйста, укажите начальную точку маршрута");
+            return false;
+        }
+
+        if (etBudget.getText().toString().trim().isEmpty()) {
+            showError("Пожалуйста, укажите бюджет");
             return false;
         }
 
         if (!hasSelectedInterests()) {
-            Toast.makeText(this, "Пожалуйста, выберите хотя бы один интерес", Toast.LENGTH_SHORT).show();
+            showError("Пожалуйста, выберите хотя бы один интерес");
             return false;
         }
 
         return true;
     }
 
+    private void showError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
     private boolean hasSelectedInterests() {
-        return architectureCheckBox.isChecked() || historyCheckBox.isChecked() ||
-                artCheckBox.isChecked() || museumsCheckBox.isChecked() ||
-                shoppingCheckBox.isChecked() || foodCheckBox.isChecked() ||
-                natureCheckBox.isChecked() || entertainmentCheckBox.isChecked() ||
-                concertsCheckBox.isChecked() || theaterCheckBox.isChecked();
+        return cbArchitecture.isChecked() || cbHistory.isChecked() ||
+                cbArt.isChecked() || cbMuseums.isChecked() ||
+                cbShopping.isChecked() || cbFood.isChecked() ||
+                cbNature.isChecked() || cbEntertainment.isChecked() ||
+                cbConcerts.isChecked() || cbTheater.isChecked();
     }
 
     private void submitSurvey() {
-        // Сбор данных
-        String timeAvailable = timeAvailableSpinner.getSelectedItem().toString();
-        String startTime = startTimeSpinner.getSelectedItem().toString();
-        String startLocation = startLocationEditText.getText().toString().trim();
-        String budget = budgetEditText.getText().toString().trim();
+        String date = etDate.getText().toString();
+        String startTime = etStartTime.getText().toString();
+        String hoursText = etDurationHours.getText().toString().trim();
+        String minutesText = etDurationMinutes.getText().toString().trim();
+        String startLocation = etStartLocation.getText().toString();
+        String budget = etBudget.getText().toString();
         String travelCompanion = travelCompanionSpinner.getSelectedItem().toString();
+
+        int hours = hoursText.isEmpty() ? 0 : Integer.parseInt(hoursText);
+        int minutes = minutesText.isEmpty() ? 0 : Integer.parseInt(minutesText);
+        int totalMinutes = hours * 60 + minutes;
+
+        if (totalMinutes == 0) {
+            showError("Пожалуйста, укажите продолжительность маршрута");
+            return;
+        }
 
         List<String> interests = getSelectedInterests();
 
-        // Создание результата
-        String result = createSurveyResult(timeAvailable, startTime, startLocation, budget, travelCompanion, interests);
+        String result = createSurveyResult(date, startTime,
+                hours, minutes, startLocation, budget, travelCompanion, interests);
 
-        // Отправка результата (можно изменить на переход к следующему экрану)
         Intent resultIntent = new Intent();
         resultIntent.putExtra("survey_result", result);
         setResult(RESULT_OK, resultIntent);
 
-        Toast.makeText(this, "Опрос завершен! Создаем ваш маршрут...", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Отлично! Создаем ваш идеальный маршрут...", Toast.LENGTH_LONG).show();
         finish();
     }
 
     private List<String> getSelectedInterests() {
         List<String> interests = new ArrayList<>();
 
-        if (architectureCheckBox.isChecked()) interests.add("Архитектура");
-        if (historyCheckBox.isChecked()) interests.add("История");
-        if (artCheckBox.isChecked()) interests.add("Искусство");
-        if (museumsCheckBox.isChecked()) interests.add("Музеи");
-        if (shoppingCheckBox.isChecked()) interests.add("Шопинг");
-        if (foodCheckBox.isChecked()) interests.add("Еда");
-        if (natureCheckBox.isChecked()) interests.add("Отдых на природе");
-        if (entertainmentCheckBox.isChecked()) interests.add("Развлечения и активность");
-        if (concertsCheckBox.isChecked()) interests.add("Концерты");
-        if (theaterCheckBox.isChecked()) interests.add("Спектакли");
+        if (cbArchitecture.isChecked()) interests.add("Архитектура");
+        if (cbHistory.isChecked()) interests.add("История");
+        if (cbArt.isChecked()) interests.add("Искусство");
+        if (cbMuseums.isChecked()) interests.add("Музеи");
+        if (cbShopping.isChecked()) interests.add("Шопинг");
+        if (cbFood.isChecked()) interests.add("Еда");
+        if (cbNature.isChecked()) interests.add("Природа");
+        if (cbEntertainment.isChecked()) interests.add("Развлечения");
+        if (cbConcerts.isChecked()) interests.add("Концерты");
+        if (cbTheater.isChecked()) interests.add("Театр");
 
         return interests;
     }
 
-    private String createSurveyResult(String timeAvailable, String startTime, String startLocation,
-                                      String budget, String travelCompanion, List<String> interests) {
+    private String createSurveyResult(String date, String startTime, int hours, int minutes,
+                                      String startLocation, String budget, String travelCompanion, List<String> interests) {
         StringBuilder result = new StringBuilder();
-        result.append("Результаты опроса:\n\n");
-        result.append("Время доступное: ").append(timeAvailable).append("\n");
+        result.append("Ваш персонализированный маршрут:\n\n");
+        result.append("Дата: ").append(date).append("\n");
         result.append("Время начала: ").append(startTime).append("\n");
-        result.append("Начальная точка: ").append(startLocation).append("\n");
-        result.append("Бюджет: ").append(budget).append("\n");
+
+        if (hours > 0) result.append("Продолжительность: ").append(hours).append(" ч ");
+        if (minutes > 0) result.append(minutes).append(" мин");
+        result.append("\n");
+
+        result.append("Старт: ").append(startLocation).append("\n");
+        result.append("Бюджет: ").append(budget).append(" руб\n");
         result.append("Компания: ").append(travelCompanion).append("\n");
         result.append("Интересы: ").append(String.join(", ", interests)).append("\n");
 
