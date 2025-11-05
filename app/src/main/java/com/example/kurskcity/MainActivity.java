@@ -1,38 +1,47 @@
 package com.example.kurskcity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.kurskcity.databinding.ActivityMainBinding;
+
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button surveyButton, posterButton;
-    private TextView viewAllFactsButton;
-    private RecyclerView factsRecyclerView;
+    private ActivityMainBinding binding;
+    private EventAdapter adapter;
     private FactAdapter factAdapter;
+    private List<KurskEventsParser.Event> allEventsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
 
-        surveyButton = findViewById(R.id.btn_survey);
-        posterButton = findViewById(R.id.btn_poster);
-        viewAllFactsButton = findViewById(R.id.btn_view_all_facts);
-        factsRecyclerView = findViewById(R.id.rv_facts);
+        // Инициализация binding
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        EdgeToEdge.enable(this);
 
         setupFactsRecyclerView();
+        initEvents();
 
-        surveyButton.setOnClickListener(new View.OnClickListener() {
+        binding.btnSurvey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SurveyActivity.class);
@@ -40,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        posterButton.setOnClickListener(new View.OnClickListener(){
+        binding.btnPoster.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(MainActivity.this, EventActivity.class);
@@ -48,13 +57,48 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        viewAllFactsButton.setOnClickListener(new View.OnClickListener() {
+        binding.btnViewAllFacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AllFactsActivity.class);
                 startActivity(intent);
             }
         });
+
+        binding.btnViewAllAttractions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, EventActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initEvents() {
+        if (!isNetworkAvailable()) {
+            Toast.makeText(this, "Нет подключения к интернету", Toast.LENGTH_SHORT).show();
+            binding.progressBarAttractions.setVisibility(View.GONE);
+            return;
+        }
+
+        binding.progressBarAttractions.setVisibility(View.VISIBLE);
+
+        new Thread(() -> {
+            allEventsList = KurskEventsParser.parseEvents("https://welcomekursk.ru/events", 15);
+
+            runOnUiThread(() -> {
+                if (!allEventsList.isEmpty()) {
+                    binding.recyclerViewEvent.setLayoutManager(new LinearLayoutManager(
+                            MainActivity.this, LinearLayoutManager.HORIZONTAL, false
+                    ));
+                    adapter = new EventAdapter(allEventsList);
+                    binding.recyclerViewEvent.setAdapter(adapter);
+                } else {
+                    Toast.makeText(MainActivity.this, "Достопримечательности не найдены", Toast.LENGTH_SHORT).show();
+                }
+                binding.progressBarAttractions.setVisibility(View.GONE);
+            });
+        }).start();
     }
 
     private void setupFactsRecyclerView() {
@@ -65,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
                 this, LinearLayoutManager.HORIZONTAL, false
         );
 
-        factsRecyclerView.setLayoutManager(layoutManager);
-        factsRecyclerView.setAdapter(factAdapter);
+        binding.rvFacts.setLayoutManager(layoutManager);
+        binding.rvFacts.setAdapter(factAdapter);
     }
 
     private List<Fact> getSampleFacts() {
@@ -92,5 +136,15 @@ public class MainActivity extends AppCompatActivity {
                         "Коренная пустынь - один из самых известных монастырей России. Ежегодно здесь проходит крестный ход с Курской Коренной иконой Божией Матери."
                 )
         );
+    }
+
+    private boolean isNetworkAvailable() {
+        try {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnected();
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

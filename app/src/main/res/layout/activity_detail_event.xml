@@ -1,303 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Detail_EventActivity">
 
-    <ScrollView
-        android:id="@+id/scrollView3"
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="50dp"
-            android:background="@color/white"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/backBtn"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="16dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:icon="@drawable/back"
+                app:iconTint="@color/darkBlue"
+                app:backgroundColor="@color/white"
+                app:cornerRadius="24dp"
+                app:elevation="4dp" />
+
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/pic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="500dp"
-                        android:scaleType="centerCrop"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@tools:sample/backgrounds/scenic" />
-
-                    <ImageView
-                        android:id="@+id/backBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="48dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/back" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="350dp"
-                    android:background="@drawable/top_corner_bg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/pic"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginBottom="16dp"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.circleImageView"
+                        tools:src="@tools:sample/backgrounds/scenic" />
+
+                    <TextView
+                        android:id="@+id/titleTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:gravity="center"
+                        android:text="Название мероприятия"
+                        android:textColor="@color/darkBlue"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
 
-                        <TextView
-                            android:id="@+id/titleTxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="24sp"
-                            android:text="title"
-                            android:textAlignment="center"
-                            android:textColor="@color/darkBlue"
-                            android:textSize="24sp"
-                            android:textStyle="bold"
-
-                            />
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeColor="@color/darkBlue"
+                        app:strokeWidth="1dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="24dp"
-                            android:orientation="horizontal">
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
-                            <ImageView
-                                android:id="@+id/imageView9"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                app:srcCompat="@drawable/location" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="8dp">
 
-                            <TextView
-                                android:id="@+id/adressTxt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_margin="8dp"
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:src="@drawable/location" />
+
+                                <TextView
+                                    android:id="@+id/adressTxt"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Адрес мероприятия"
+                                    android:textColor="@color/darkBlue"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:src="@drawable/hourglass"
+                                     />
+
+                                <TextView
+                                    android:id="@+id/locationTxt"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Дата и время"
+                                    android:textColor="@color/darkBlue"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="adress"
-                                android:textColor="@color/darkBlue"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginTop="8dp"
-                            android:orientation="horizontal">
-
-
-                            <TextView
-                                android:id="@+id/locationTxt"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center_vertical"
-                                android:textColor="@color/darkBlue"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-                        <Space
-                            android:layout_width="wrap_content"
-                            android:layout_height="10dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginEnd="24dp"
-                            android:background="@drawable/grey_bg_corner"
-                            android:orientation="horizontal">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.333">
+                                android:orientation="vertical"
+                                android:gravity="center">
 
                                 <TextView
                                     android:id="@+id/durationTxt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginTop="16dp"
-                                    android:text="- min"
+                                    android:text="2 часа"
                                     android:textColor="@color/darkBlue"
-                                    android:textStyle="bold"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintHorizontal_bias="0.7"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <ImageView
-                                    android:id="@+id/imageView101"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="8dp"
-                                    app:layout_constraintBottom_toBottomOf="@+id/durationTxt"
-                                    app:layout_constraintEnd_toStartOf="@+id/durationTxt"
-                                    app:layout_constraintTop_toTopOf="@+id/durationTxt"
-                                    app:srcCompat="@drawable/location" />
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
                                 <TextView
-
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="8dp"
-                                    android:text="Дата"
+                                    android:text="Длительность"
                                     android:textColor="@color/darkBlue"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/imageView101" />
+                                    android:textSize="14sp" />
+                            </LinearLayout>
 
-                            </androidx.constraintlayout.widget.ConstraintLayout>
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="40dp"
+                                android:background="@color/darkBlue"
+                                android:layout_marginHorizontal="8dp" />
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.333">
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center">
 
                                 <TextView
                                     android:id="@+id/distanceTxt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="16dp"
-                                    android:text="0"
+                                    android:text="500 ₽"
                                     android:textColor="@color/darkBlue"
-                                    android:textStyle="bold"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
                                 <TextView
-
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="8dp"
                                     android:text="Цена"
                                     android:textColor="@color/darkBlue"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent" />
+                                    android:textSize="14sp" />
+                            </LinearLayout>
 
-                            </androidx.constraintlayout.widget.ConstraintLayout>
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="40dp"
+                                android:background="@color/darkBlue"
+                                android:layout_marginHorizontal="8dp" />
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.333">
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center">
 
                                 <TextView
                                     android:id="@+id/bedTxt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="16dp"
-                                    android:text="0"
+                                    android:text="Концерт"
                                     android:textColor="@color/darkBlue"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toTopOf="@+id/textView14"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
                                 <TextView
-                                    android:id="@+id/textView14"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="8dp"
                                     android:text="Тип"
                                     android:textColor="@color/darkBlue"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                                    android:textSize="14sp" />
+                            </LinearLayout>
                         </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                        <TextView
-                            android:id="@+id/textView16"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginTop="16dp"
-                            android:text="Описание"
-                            android:textColor="@color/darkBlue"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Описание"
+                        android:textColor="@color/darkBlue"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp">
 
                         <TextView
                             android:id="@+id/descriptionTxt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="24dp"
-                            android:paddingBottom="40sp"
-                            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing od tempor incididunt ut labore et a. Ut enim ad minim veniam, quis ion ullamco laboris nisi ut aliquip sequat. Ut enim ad minim ud exercitation ullamco laboris ea commodo consequat  "
+                            android:padding="16dp"
+                            android:text="Подробное описание мероприятия..."
                             android:textColor="@color/darkBlue"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp" />
+                    </com.google.android.material.card.MaterialCardView>
 
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addToCartBtn"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="16dp"
+                android:text="Посмотреть подробности"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:cornerRadius="16dp"
+                app:backgroundColor="@color/darkBlue"
+                app:elevation="4dp" />
 
-                    </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
-    </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="@color/lightGray"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addToCartBtn"
-            style="@android:style/Widget.Button"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/blue_bg"
-            android:text="Посмотреть подробности"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
