@@ -52,7 +52,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/search_icon"
-                        android:tint="@color/darkBlue" />
+                        app:tint="@color/darkBlue" />
 
                     <EditText
                         android:id="@+id/editTextText"
@@ -77,7 +77,7 @@
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         app:cornerRadius="10dp"
-                        app:backgroundColor="@color/darkBlue" />
+                        app:backgroundTint="@color/darkBlue" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
