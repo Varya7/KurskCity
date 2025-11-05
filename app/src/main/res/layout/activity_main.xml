@@ -1,40 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center">
+    android:background="@android:color/white">
 
-    <Button
-        android:id="@+id/btn_poster"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Афиша"
-        android:textSize="18sp"
-        android:padding="16dp"
-        android:background="#FF6200EE"
-        android:textColor="@android:color/white" />
-    <Space android:layout_height="10dp"
-        android:layout_width="match_parent">
+        android:orientation="vertical">
 
-    </Space>
-    <Button
-        android:id="@+id/btn_survey"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Пройти опрос"
-        android:textSize="18sp"
-        android:padding="16dp"
-        android:background="#FF6200EE"
-        android:textColor="@android:color/white" />
+        <!-- Существующие кнопки -->
+        <Button
+            android:id="@+id/btn_poster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Афиша"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:background="#FF6200EE"
+            android:textColor="@android:color/white" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Нажмите кнопку выше чтобы начать опрос"
-        android:textSize="14sp"
-        android:layout_marginTop="20dp"
-        android:textColor="@android:color/darker_gray" />
+        <Space
+            android:layout_height="10dp"
+            android:layout_width="match_parent" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_survey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Пройти опрос"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:background="#FF6200EE"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Нажмите кнопку выше чтобы начать опрос"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@android:color/darker_gray" />
+
+        <!-- Новый раздел с фактами -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Интересные факты"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#333333" />
+
+            <TextView
+                android:id="@+id/btn_view_all_facts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Все факты →"
+                android:textColor="#FF6200EE"
+                android:textSize="14sp"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_facts"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="12dp" />
+
+    </LinearLayout>
+
+</ScrollView>
