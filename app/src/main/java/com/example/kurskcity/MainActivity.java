@@ -49,13 +49,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.btnPoster.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this, EventActivity.class);
-                startActivity(intent);
-            }
-        });
 
         binding.btnViewAllFacts.setOnClickListener(new View.OnClickListener() {
             @Override
