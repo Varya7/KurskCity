@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 public class FactDetailActivity extends AppCompatActivity {
 
@@ -13,9 +12,10 @@ public class FactDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fact_detail);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Скрываем ActionBar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         Fact fact = (Fact) getIntent().getSerializableExtra("fact");
 
@@ -24,13 +24,5 @@ public class FactDetailActivity extends AppCompatActivity {
 
         titleTextView.setText(fact.getTitle());
         contentTextView.setText(fact.getFullContent());
-
-        toolbar.setTitle(fact.getTitle());
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }
