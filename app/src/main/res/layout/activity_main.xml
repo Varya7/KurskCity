@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Существующие кнопки -->
         <Button
             android:id="@+id/btn_poster"
             android:layout_width="match_parent"
@@ -43,7 +42,6 @@
             android:layout_marginTop="20dp"
             android:textColor="@android:color/darker_gray" />
 
-        <!-- Новый раздел с фактами -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
