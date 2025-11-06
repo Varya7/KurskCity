@@ -32,23 +32,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Инициализация binding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        EdgeToEdge.enable(this);
 
         setupFactsRecyclerView();
         initEvents();
 
-        binding.btnSurvey.setOnClickListener(new View.OnClickListener() {
+        binding.fabRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SurveyActivity.class);
                 startActivity(intent);
             }
         });
-
 
         binding.btnViewAllFacts.setOnClickListener(new View.OnClickListener() {
             @Override
