@@ -80,59 +80,7 @@
                         app:strokeColor="#3F51B5"
                         app:strokeWidth="1dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="16dp">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginBottom="8dp">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:src="@drawable/location"
-                                    android:tint="#3F51B5"
-                                    tools:ignore="UseAppTint" />
-
-                                <TextView
-                                    android:id="@+id/adressTxt"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Адрес"
-                                    android:textColor="#3F51B5"
-                                    android:textSize="16sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:src="@drawable/hourglass"
-                                    android:tint="#3F51B5"
-                                    tools:ignore="UseAppTint" />
-
-                                <TextView
-                                    android:id="@+id/locationTxt"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Время работы"
-                                    android:textColor="#FF2196F3"
-                                    android:textSize="16sp" />
-                            </LinearLayout>
-                        </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
@@ -144,96 +92,7 @@
                         app:strokeColor="#3F51B5"
                         app:strokeWidth="1dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="16dp">
 
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:gravity="center">
-
-                                <TextView
-                                    android:id="@+id/durationTxt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Не указано"
-                                    android:textColor="#3F51B5"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Рекомендуемое время"
-                                    android:textColor="#3F51B5"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="40dp"
-                                android:background="#3F51B5"
-                                android:layout_marginHorizontal="8dp" />
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:gravity="center">
-
-                                <TextView
-                                    android:id="@+id/distanceTxt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Бесплатно"
-                                    android:textColor="#3F51B5"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Стоимость"
-                                    android:textColor="#3F51B5"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="40dp"
-                                android:background="#3F51B5"
-                                android:layout_marginHorizontal="8dp" />
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:gravity="center">
-
-                                <TextView
-                                    android:id="@+id/bedTxt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Категория"
-                                    android:textColor="#3F51B5"
-                                    android:textSize="18sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Тип"
-                                    android:textColor="#3F51B5"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-                        </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
                     <TextView
@@ -266,18 +125,6 @@
 
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/addToCartBtn"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginTop="16dp"
-                android:text="Построить маршрут"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                app:cornerRadius="16dp"
-                app:backgroundTint="#3F51B5"
-                app:elevation="4dp" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

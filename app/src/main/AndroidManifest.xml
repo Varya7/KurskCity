@@ -9,9 +9,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher1"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher1_round"
+        android:icon="@mipmap/ic_launcher2"
+        android:label="Курский путь"
+        android:roundIcon="@mipmap/ic_launcher2_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KurskCity"
         tools:targetApi="31">

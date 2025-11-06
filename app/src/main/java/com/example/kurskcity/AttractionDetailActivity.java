@@ -40,19 +40,10 @@ public class AttractionDetailActivity extends AppCompatActivity {
             binding.pic.setImageBitmap(bitmap);
         }
 
-        // Устанавливаем тексты
         binding.titleTxt.setText(attraction.getName());
         binding.categoryTxt.setText(attraction.getCategories());
         binding.descriptionTxt.setText(attraction.getDescription());
 
-        // Для достопримечательностей скрываем ненужные поля или адаптируем
-        binding.durationTxt.setText("Не указано");
-        binding.distanceTxt.setText("Бесплатно");
-        binding.bedTxt.setText(attraction.getCategories());
-
-        // Адаптируем адрес и время под достопримечательности
-        binding.adressTxt.setText("Курск, центр города");
-        binding.locationTxt.setText("Круглосуточно");
     }
 
     private void setupBackButton() {

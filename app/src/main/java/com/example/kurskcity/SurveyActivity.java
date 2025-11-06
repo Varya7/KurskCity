@@ -59,13 +59,10 @@ public class SurveyActivity extends AppCompatActivity {
             );
         }
 
-        // Создаем CheckBox для категорий достопримечательностей
         createCategoryCheckBoxes(layoutAttractionCategories, availableAttractionCategories, "attraction_");
 
-        // Создаем CheckBox для категорий мероприятий
         createCategoryCheckBoxes(layoutEventCategories, availableEventCategories, "event_");
 
-        // Добавляем слушатели для обновления состояния кнопки
         setupCheckboxListeners();
     }
 
@@ -99,7 +96,7 @@ public class SurveyActivity extends AppCompatActivity {
     }
 
     private void setupCheckboxListeners() {
-        // Слушатели уже добавлены в createCategoryCheckBoxes
+
     }
 
     private void setupDatePicker() {
@@ -163,7 +160,6 @@ public class SurveyActivity extends AppCompatActivity {
         List<String> eventCategories = getSelectedEventCategories();
         boolean hasDate = !etDate.getText().toString().trim().isEmpty();
 
-        // Если выбраны мероприятия, но не выбрана дата - показываем ошибку
         if (!eventCategories.isEmpty() && !hasDate) {
             showError("Для подбора мероприятий необходимо выбрать дату");
             return false;
