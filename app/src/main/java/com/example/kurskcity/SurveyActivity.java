@@ -15,6 +15,7 @@ public class SurveyActivity extends AppCompatActivity {
 
     private TextInputEditText etDate;
     private LinearLayout layoutAttractionCategories, layoutEventCategories;
+    private TextView tvDateLabel;
     private Button submitButton;
     private Calendar calendar;
     private AttractionsDbHelper dbHelper;
@@ -34,21 +35,24 @@ public class SurveyActivity extends AppCompatActivity {
         loadCategoriesFromDatabase();
         setupDatePicker();
         setupSubmitButton();
+        updateUIState();
     }
 
     private void initializeViews() {
         etDate = findViewById(R.id.et_date);
         layoutAttractionCategories = findViewById(R.id.layout_attraction_categories);
         layoutEventCategories = findViewById(R.id.layout_event_categories);
+        tvDateLabel = findViewById(R.id.tv_date_label);
         submitButton = findViewById(R.id.btn_submit);
     }
 
     private void loadCategoriesFromDatabase() {
-        // Загружаем категории достопримечательностей из базы данных
-        availableAttractionCategories = dbHelper.getAttractionCategories();
-
-        // Если в базе нет категорий, используем стандартные
-        if (availableAttractionCategories.isEmpty()) {
+        try {
+            // Загружаем категории достопримечательностей из базы данных
+            availableAttractionCategories = dbHelper.getAttractionCategories();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Если произошла ошибка, используем стандартные категории
             availableAttractionCategories = Arrays.asList(
                     "Архитектура", "История", "Искусство", "Музеи", "Религия", "Памятники",
                     "Парки", "Природа", "Культура", "Развлечения"
@@ -60,10 +64,22 @@ public class SurveyActivity extends AppCompatActivity {
 
         // Создаем CheckBox для категорий мероприятий
         createCategoryCheckBoxes(layoutEventCategories, availableEventCategories, "event_");
+
+        // Добавляем слушатели для обновления состояния кнопки
+        setupCheckboxListeners();
     }
 
     private void createCategoryCheckBoxes(LinearLayout layout, List<String> categories, String prefix) {
         layout.removeAllViews();
+
+        if (categories.isEmpty()) {
+            TextView noCategoriesText = new TextView(this);
+            noCategoriesText.setText("Категории не найдены");
+            noCategoriesText.setTextSize(14);
+            noCategoriesText.setTextColor(0xFF666666);
+            layout.addView(noCategoriesText);
+            return;
+        }
 
         for (String category : categories) {
             CheckBox checkBox = new CheckBox(this);
@@ -73,8 +89,17 @@ public class SurveyActivity extends AppCompatActivity {
             checkBox.setTextSize(14);
             checkBox.setPadding(0, 8, 0, 8);
 
+            // Добавляем слушатель изменения состояния
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                updateUIState();
+            });
+
             layout.addView(checkBox);
         }
+    }
+
+    private void setupCheckboxListeners() {
+        // Слушатели уже добавлены в createCategoryCheckBoxes
     }
 
     private void setupDatePicker() {
@@ -89,6 +114,7 @@ public class SurveyActivity extends AppCompatActivity {
                     calendar.set(Calendar.MONTH, month);
                     calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     updateDateLabel();
+                    updateUIState(); // Обновляем состояние после выбора даты
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -104,6 +130,27 @@ public class SurveyActivity extends AppCompatActivity {
         etDate.setText(sdf.format(calendar.getTime()));
     }
 
+    private void updateUIState() {
+        boolean hasSelectedAttractions = getSelectedAttractionCategories().size() > 0;
+        boolean hasSelectedEvents = getSelectedEventCategories().size() > 0;
+        boolean hasDate = !etDate.getText().toString().trim().isEmpty();
+
+        // Проверяем условия: если выбраны мероприятия - нужна дата, если только достопримечательности - дата не нужна
+        boolean canProceed = hasSelectedAttractions || (hasSelectedEvents && hasDate);
+
+        submitButton.setEnabled(canProceed);
+        submitButton.setAlpha(canProceed ? 1.0f : 0.5f);
+
+        // Обновляем подсказку о дате
+        if (hasSelectedEvents && !hasDate) {
+            tvDateLabel.setText("Для подбора мероприятий выберите дату");
+            tvDateLabel.setTextColor(0xFFFF0000); // Красный цвет для предупреждения
+        } else {
+            tvDateLabel.setText("Дата посещения (требуется для мероприятий)");
+            tvDateLabel.setTextColor(0xFF2196F3); // Синий цвет по умолчанию
+        }
+    }
+
     private void setupSubmitButton() {
         submitButton.setOnClickListener(v -> {
             if (validateInput()) {
@@ -113,8 +160,12 @@ public class SurveyActivity extends AppCompatActivity {
     }
 
     private boolean validateInput() {
-        if (etDate.getText().toString().trim().isEmpty()) {
-            showError("Пожалуйста, выберите дату");
+        List<String> eventCategories = getSelectedEventCategories();
+        boolean hasDate = !etDate.getText().toString().trim().isEmpty();
+
+        // Если выбраны мероприятия, но не выбрана дата - показываем ошибку
+        if (!eventCategories.isEmpty() && !hasDate) {
+            showError("Для подбора мероприятий необходимо выбрать дату");
             return false;
         }
 
@@ -136,7 +187,6 @@ public class SurveyActivity extends AppCompatActivity {
 
     private void submitSurvey() {
         String date = etDate.getText().toString();
-
         List<String> attractionCategories = getSelectedAttractionCategories();
         List<String> eventCategories = getSelectedEventCategories();
 
@@ -149,7 +199,16 @@ public class SurveyActivity extends AppCompatActivity {
         resultIntent.putExtra("recommendation_request", request);
         setResult(RESULT_OK, resultIntent);
 
-        Toast.makeText(this, "Подбираем лучшие рекомендации...", Toast.LENGTH_LONG).show();
+        String message;
+        if (!attractionCategories.isEmpty() && !eventCategories.isEmpty()) {
+            message = "Подбираем достопримечательности и мероприятия...";
+        } else if (!attractionCategories.isEmpty()) {
+            message = "Подбираем достопримечательности...";
+        } else {
+            message = "Подбираем мероприятия...";
+        }
+
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         finish();
     }
 

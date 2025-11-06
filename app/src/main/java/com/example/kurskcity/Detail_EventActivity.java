@@ -88,8 +88,7 @@ public class Detail_EventActivity extends AppCompatActivity {
 
     private void setVariable(KurskEventParser.Event kurskEvent) {
         binding.descriptionTxt.setText(kurskEvent.getDescription());
-        binding.adressTxt.setText(kurskEvent.getAddress());
-        binding.locationTxt.setText(kurskEvent.getLocation());
+
     }
 
     /**

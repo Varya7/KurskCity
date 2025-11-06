@@ -27,7 +27,7 @@
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 app:icon="@drawable/back"
-                app:iconTint="#FF2196F3"
+                app:iconTint="#3F51B5"
                 app:backgroundColor="@color/white"
                 app:cornerRadius="24dp"
                 app:elevation="4dp" />
@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Название мероприятия"
-                        android:textColor="#FF2196F3"
+                        android:textColor="#3F51B5"
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="16dp" />
@@ -68,60 +68,10 @@
                         android:layout_marginBottom="16dp"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="2dp"
-                        app:strokeColor="#FF2196F3"
+                        app:strokeColor="#3F51B5"
                         app:strokeWidth="1dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="16dp">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginBottom="8dp">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:src="@drawable/location"
-                                    android:tint="#FF2196F3" />
-
-                                <TextView
-                                    android:id="@+id/adressTxt"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Адрес мероприятия"
-                                    android:textColor="#FF2196F3"
-                                    android:textSize="16sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:src="@drawable/hourglass"
-                                    android:tint="#FF2196F3" />
-
-                                <TextView
-                                    android:id="@+id/locationTxt"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Дата и время"
-                                    android:textColor="#FF2196F3"
-                                    android:textSize="16sp" />
-                            </LinearLayout>
-                        </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
@@ -130,7 +80,7 @@
                         android:layout_marginBottom="16dp"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="2dp"
-                        app:strokeColor="#FF2196F3"
+                        app:strokeColor="#3F51B5"
                         app:strokeWidth="1dp">
 
                         <LinearLayout
@@ -151,7 +101,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="2 часа"
-                                    android:textColor="#FF2196F3"
+                                    android:textColor="#3F51B5"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
 
@@ -159,14 +109,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Длительность"
-                                    android:textColor="#FF2196F3"
+                                    android:textColor="#3F51B5"
                                     android:textSize="14sp" />
                             </LinearLayout>
 
                             <View
                                 android:layout_width="1dp"
                                 android:layout_height="40dp"
-                                android:background="#FF2196F3"
+                                android:background="#3F51B5"
                                 android:layout_marginHorizontal="8dp" />
 
                             <LinearLayout
@@ -181,7 +131,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="500 ₽"
-                                    android:textColor="#FF2196F3"
+                                    android:textColor="#3F51B5"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
 
@@ -189,14 +139,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Цена"
-                                    android:textColor="#FF2196F3"
+                                    android:textColor="#3F51B5"
                                     android:textSize="14sp" />
                             </LinearLayout>
 
                             <View
                                 android:layout_width="1dp"
                                 android:layout_height="40dp"
-                                android:background="#FF2196F3"
+                                android:background="#3F51B5"
                                 android:layout_marginHorizontal="8dp" />
 
                             <LinearLayout
@@ -211,7 +161,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Концерт"
-                                    android:textColor="#FF2196F3"
+                                    android:textColor="#3F51B5"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
 
@@ -219,7 +169,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Тип"
-                                    android:textColor="#FF2196F3"
+                                    android:textColor="#3F51B5"
                                     android:textSize="14sp" />
                             </LinearLayout>
                         </LinearLayout>
@@ -229,7 +179,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Описание"
-                        android:textColor="#FF2196F3"
+                        android:textColor="#3F51B5"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp" />
@@ -239,7 +189,7 @@
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="2dp"
-                        app:strokeColor="#FF2196F3"
+                        app:strokeColor="#3F51B5"
                         app:strokeWidth="1dp">
 
                         <TextView
@@ -248,7 +198,7 @@
                             android:layout_height="wrap_content"
                             android:padding="16dp"
                             android:text="Подробное описание мероприятия..."
-                            android:textColor="#FF2196F3"
+                            android:textColor="#3F51B5"
                             android:textSize="16sp"
                             android:lineSpacingExtra="4dp" />
                     </com.google.android.material.card.MaterialCardView>
@@ -265,7 +215,7 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:cornerRadius="16dp"
-                app:backgroundTint="#FF2196F3"
+                app:backgroundTint="#3F51B5"
                 app:elevation="4dp" />
 
         </LinearLayout>

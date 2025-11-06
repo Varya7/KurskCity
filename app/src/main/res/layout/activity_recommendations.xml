@@ -1,148 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@android:color/white">
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="16dp">
 
-    <LinearLayout
+    <!-- Заголовок -->
+    <TextView
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="Рекомендации"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FF2196F3"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
 
-        <!-- Заголовок -->
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Рекомендации"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#FF2196F3"
-            android:gravity="center"
-            android:layout_marginBottom="24dp" />
+    <!-- Прогресс бар -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
 
-        <!-- Прогресс бар -->
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp" />
+    <!-- Сообщение, если нет рекомендаций -->
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="По вашим интересам рекомендации не найдены"
+        android:textColor="#666666"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:padding="40dp"
+        android:visibility="gone" />
 
-        <!-- Раздел с рекомендованными достопримечательностями -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="4dp"
-            app:strokeColor="#FF2196F3"
-            app:strokeWidth="1dp">
+    <!-- Единый RecyclerView для всех рекомендаций -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_recommendations"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="16dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Рекомендуемые достопримечательности"
-                        android:textColor="#333333"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <!-- Сообщение, если нет достопримечательностей -->
-                <TextView
-                    android:id="@+id/tv_empty_attractions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="По выбранным категориям не найдено достопримечательностей"
-                    android:textColor="#666666"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:padding="20dp"
-                    android:visibility="gone" />
-
-                <!-- RecyclerView для достопримечательностей -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_recommended_attractions"
-                    android:layout_width="match_parent"
-                    android:layout_height="280dp" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Раздел с рекомендованными мероприятиями -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="4dp"
-            app:strokeColor="#FF2196F3"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="16dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Рекомендуемые мероприятия"
-                        android:textColor="#333333"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <!-- Сообщение, если нет мероприятий -->
-                <TextView
-                    android:id="@+id/tv_empty_events"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="По выбранным категориям не найдено мероприятий"
-                    android:textColor="#666666"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:padding="20dp"
-                    android:visibility="gone" />
-
-                <!-- RecyclerView для мероприятий -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_recommended_events"
-                    android:layout_width="match_parent"
-                    android:layout_height="280dp" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>
