@@ -6,17 +6,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.kurskcity.databinding.ActivityMainBinding;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
@@ -24,9 +17,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private EventAdapter adapter;
+    private EventAdapter eventAdapter;
     private FactAdapter factAdapter;
+    private AttractionAdapter attractionAdapter;
     private List<KurskEventsParser.Event> allEventsList = new ArrayList<>();
+    private AttractionsDbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +30,19 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Инициализация базы данных
+        dbHelper = new AttractionsDbHelper(this);
+
+        // Настройка всех RecyclerView
+        setupAttractionsRecyclerView();
         setupFactsRecyclerView();
         initEvents();
 
+        // Обработчики кнопок
         binding.fabRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SurveyActivity.class);
-                startActivity(intent);
+                Toast.makeText(MainActivity.this, "Построение маршрута", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -54,38 +54,63 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.btnViewAllAttractions.setOnClickListener(new View.OnClickListener() {
+        binding.btnViewAllEvents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, EventActivity.class);
                 startActivity(intent);
             }
         });
+
+        binding.btnViewAllPlaces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AllAttractionsActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void setupAttractionsRecyclerView() {
+        List<Attraction> attractions = dbHelper.getAttractionsForMainPage(10); // 10 для главного экрана
+
+        if (attractions.isEmpty()) {
+            Toast.makeText(this, "Достопримечательности не найдены", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        attractionAdapter = new AttractionAdapter(attractions, true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(
+                this, LinearLayoutManager.HORIZONTAL, false
+        );
+
+        binding.rvAttractions.setLayoutManager(layoutManager);
+        binding.rvAttractions.setAdapter(attractionAdapter);
     }
 
     private void initEvents() {
         if (!isNetworkAvailable()) {
             Toast.makeText(this, "Нет подключения к интернету", Toast.LENGTH_SHORT).show();
-            binding.progressBarAttractions.setVisibility(View.GONE);
+            binding.progressBarEvents.setVisibility(View.GONE);
             return;
         }
 
-        binding.progressBarAttractions.setVisibility(View.VISIBLE);
+        binding.progressBarEvents.setVisibility(View.VISIBLE);
 
         new Thread(() -> {
-            allEventsList = KurskEventsParser.parseEvents("https://welcomekursk.ru/events", 15);
+            allEventsList = KurskEventsParser.parseEvents("https://welcomekursk.ru/events", 10);
 
             runOnUiThread(() -> {
                 if (!allEventsList.isEmpty()) {
                     binding.recyclerViewEvent.setLayoutManager(new LinearLayoutManager(
                             MainActivity.this, LinearLayoutManager.HORIZONTAL, false
                     ));
-                    adapter = new EventAdapter(allEventsList);
-                    binding.recyclerViewEvent.setAdapter(adapter);
+                    eventAdapter = new EventAdapter(allEventsList);
+                    binding.recyclerViewEvent.setAdapter(eventAdapter);
                 } else {
-                    Toast.makeText(MainActivity.this, "Достопримечательности не найдены", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Мероприятия не найдены", Toast.LENGTH_SHORT).show();
                 }
-                binding.progressBarAttractions.setVisibility(View.GONE);
+                binding.progressBarEvents.setVisibility(View.GONE);
             });
         }).start();
     }
@@ -135,5 +160,13 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (dbHelper != null) {
+            dbHelper.close();
+        }
+        super.onDestroy();
     }
 }
