@@ -16,6 +16,9 @@
         android:theme="@style/Theme.KurskCity"
         tools:targetApi="31">
         <activity
+            android:name=".RecommendationsActivity"
+            android:exported="false" />
+        <activity
             android:name=".AttractionDetailActivity"
             android:exported="false" />
         <activity

@@ -241,14 +241,15 @@
     </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_route"
+        android:id="@+id/fab_recommendation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
-        android:src="@drawable/ic_route"
-        app:backgroundTint="#FF2196F3"
-        app:elevation="8dp"
-        app:tint="@android:color/white" />
+        android:src="@drawable/ic_recommendation"
+    android:contentDescription="Получить рекомендации"
+    app:backgroundTint="#FF2196F3"
+    app:elevation="8dp"
+    app:tint="@android:color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

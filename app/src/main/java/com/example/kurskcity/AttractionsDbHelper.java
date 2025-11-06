@@ -146,4 +146,53 @@ public class AttractionsDbHelper extends SQLiteOpenHelper {
 
         return attractions;
     }
+
+    public List<String> getAttractionCategories() {
+        List<String> categories = new ArrayList<>();
+
+        try {
+            openDatabase();
+
+            // Получаем уникальные категории из базы данных
+            Cursor cursor = database.query(
+                    true, // distinct - только уникальные значения
+                    "attactions",
+                    new String[]{"categories"},
+                    null, null, null, null,
+                    "categories ASC", // сортируем по алфавиту
+                    null
+            );
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    String category = cursor.getString(cursor.getColumnIndexOrThrow("categories"));
+                    if (category != null && !category.trim().isEmpty() && !categories.contains(category)) {
+                        categories.add(category);
+                    }
+                } while (cursor.moveToNext());
+
+                cursor.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeDatabase();
+        }
+
+        // Если в базе нет категорий, используем стандартные
+        if (categories.isEmpty()) {
+            categories.add("Архитектура");
+            categories.add("История");
+            categories.add("Искусство");
+            categories.add("Музеи");
+            categories.add("Религия");
+            categories.add("Памятники");
+            categories.add("Парки");
+            categories.add("Природа");
+        }
+
+        return categories;
+    }
+
+
 }

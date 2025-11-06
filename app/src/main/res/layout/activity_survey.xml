@@ -3,18 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Подбор рекомендаций"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#FF2196F3"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
         <!-- Дата -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Дата">
+            android:hint="Дата посещения"
+            app:hintTextColor="#FF2196F3"
+            app:boxStrokeColor="#FF2196F3"
+            android:layout_marginBottom="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_date"
@@ -24,185 +38,49 @@
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Время начала -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Время начала">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_start_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:inputType="none" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Продолжительность (часы и минуты) -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="8dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:hint="Часы">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_duration_hours"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=":"
-                android:textSize="18sp"
-                android:layout_marginHorizontal="8dp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:hint="Минуты">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_duration_minutes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <!-- Начальная точка -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Начальная точка маршрута">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_start_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Бюджет -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Бюджет (₽)">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_budget"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Компания -->
+        <!-- Достопримечательности -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="С кем вы путешествуете?"
+            android:text="Интересы в достопримечательностях:"
             android:textSize="16sp"
-            android:layout_marginTop="16dp" />
-
-        <Spinner
-            android:id="@+id/spinner_travel_companion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
-
-        <!-- Интересы -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ваши интересы:"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp" />
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
 
         <LinearLayout
+            android:id="@+id/layout_attraction_categories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="8dp">
+            android:layout_marginBottom="16dp" />
 
-            <CheckBox
-                android:id="@+id/cb_architecture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Архитектура" />
+        <!-- Мероприятия -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Интересы в мероприятиях:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
 
-            <CheckBox
-                android:id="@+id/cb_history"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="История" />
-
-            <CheckBox
-                android:id="@+id/cb_art"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Искусство" />
-
-            <CheckBox
-                android:id="@+id/cb_museums"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Музеи" />
-
-            <CheckBox
-                android:id="@+id/cb_shopping"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Шопинг" />
-
-            <CheckBox
-                android:id="@+id/cb_food"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Еда" />
-
-            <CheckBox
-                android:id="@+id/cb_nature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Природа" />
-
-            <CheckBox
-                android:id="@+id/cb_entertainment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Развлечения" />
-
-            <CheckBox
-                android:id="@+id/cb_concerts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Концерты" />
-
-            <CheckBox
-                android:id="@+id/cb_theater"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Театр" />
-        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_event_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp" />
 
         <!-- Кнопка -->
         <Button
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Создать маршрут"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/teal_700"
-            android:textColor="@android:color/white" />
+            android:text="Получить рекомендации"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#FF2196F3"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 </ScrollView>
