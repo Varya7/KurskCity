@@ -19,18 +19,17 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <com.google.android.material.button.MaterialButton
+            <ImageView
                 android:id="@+id/backBtn"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginBottom="16dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                app:icon="@drawable/back"
-                app:iconTint="#3F51B5"
-                app:backgroundColor="@android:color/white"
-                app:cornerRadius="24dp"
-                app:elevation="4dp" />
+                android:padding="5dp"
+                android:src="@drawable/back"
+                android:tint="#3F51B5"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true" />
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
